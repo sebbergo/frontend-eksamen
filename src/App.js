@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import facade from "./apiFacade";
 import LogIn, { LoggedIn } from "./LogIn.js";
 import Header from "./Header.js";
-import Starwars from "./Starwars.js";
-import StarwarsPlanet from "./StarwarsPlanets.js";
-import Joke from "./Joke";
 import Admin from "./Admin.js";
 import User from "./User.js";
-import PlanetsArray from "./PlanetsArray";
+import Contact from "./Contact";
+import AddContact from "./AddContact";
+import GetContact from "./GetContact";
+import EditContact from "./EditContact";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -33,18 +33,6 @@ function App() {
     <div>
       <Header />
       <Switch>
-        <Route path="/starwars">
-          <Starwars />
-        </Route>
-        <Route path="/joke">
-          <Joke />
-        </Route>
-        <Route path="/starwarsPlanet">
-          <StarwarsPlanet />
-        </Route>
-        <Route path="/planetsArray">
-          <PlanetsArray />
-        </Route>
         {!loggedIn ? (
           <div>
             <Route exact path="/">
@@ -96,6 +84,15 @@ function App() {
                 ) : (
                   <p>Du er ikke logget ind som admin</p>
                 )}
+              </Route>
+            </div>
+            <div>
+              <Route path="/contact">
+                <Contact
+                  AddContact={AddContact}
+                  GetContact={GetContact}
+                  EditContact={EditContact}
+                />
               </Route>
             </div>
           </div>
