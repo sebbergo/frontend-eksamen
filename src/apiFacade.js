@@ -93,6 +93,22 @@ function apiFacade() {
     );
   };
 
+  const addOpportunity = (body, id) => {
+    const options = makeOptions("PUT", true, body);
+
+    return fetch(URL + "/api/contact/addOpportunity/" + id, options).then(
+      handleHttpErrors
+    );
+  };
+
+  const getOpportunitiesFromContact = (id) => {
+    const options = makeOptions("GET", true);
+
+    return fetch(URL + "/api/contact/getOpportunities/" + id, options).then(
+      handleHttpErrors
+    );
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -124,6 +140,8 @@ function apiFacade() {
     findContact,
     editContact,
     deleteContact,
+    addOpportunity,
+    getOpportunitiesFromContact,
   };
 }
 

@@ -25,6 +25,11 @@ function Header(props) {
             Contact
           </NavLink>
         </li>
+        <li>
+          <NavLink activeClassName="active" to="/opportunities">
+            Opportunities
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

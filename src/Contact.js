@@ -31,7 +31,8 @@ function Contact(props) {
 
   const handleSubmitDelete = (evt) => {
     evt.preventDefault();
-    facade.deleteContact(evt.target.id).then((data) => setContact(data));
+    console.log(evt.target.id);
+    facade.deleteContact(evt.target.id);
     setLoad(true);
   };
 
@@ -73,11 +74,11 @@ function Contact(props) {
           ))}
         </tbody>
       </Table>
+      <props.EditContact contact={contact} setContact={setContact} />
+      <br />
       <props.AddContact setLoad={setLoad} />
       <br />
       <props.GetContact />
-      <br />
-      <props.EditContact contact={contact} setContact={setContact} />
     </div>
   );
 }
