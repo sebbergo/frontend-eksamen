@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-function GetContact(props) {
+function GetContact() {
   let contactObj = {
-    id: "X",
+    id: "",
     name: "John",
     email: "Doe",
     company: "Unknown",
@@ -13,24 +13,44 @@ function GetContact(props) {
     phone: "xxxxxxxx",
   };
 
+  let opportunityObj = {
+    name: "",
+    amount: "",
+    closeDate: "",
+  };
+
+  const [opportunity, setOpportunity] = useState(opportunityObj);
   const [contact, setContact] = useState(contactObj);
 
-  const handleChange = (evt) => {
+  const handleChangeContact = (evt) => {
     setContact({
       ...contact,
       [evt.target.id]: evt.target.value,
     });
   };
 
-  const handleSubmit = (evt) => {
+  const handleChangeOpportunity = (evt) => {
+    setOpportunity({
+      ...opportunity,
+      [evt.target.id]: evt.target.value,
+    });
+  };
+
+  const handleSubmitContact = (evt) => {
     evt.preventDefault();
     console.log(contact.id);
     facade.findContact(contact.id).then((data) => setContact(data));
   };
 
+  const handleSubmitOpportunity = (evt) => {
+    evt.preventDefault();
+    console.log(opportunity);
+    facade.addOpportunity(opportunity, contact.id);
+  };
+
   return (
     <div>
-      <form onChange={handleChange}>
+      <form onChange={handleChangeContact}>
         <p>
           Name: {contact.name}, Email: {contact.email}, Company:{" "}
           {contact.company}, Jobtitle: {contact.jobtitle}, Phone:
@@ -38,13 +58,35 @@ function GetContact(props) {
         </p>
         <p>Enter ID:</p>
         <input
-          onChange={handleChange}
+          onChange={handleChangeContact}
           type="text"
           id="id"
           value={contact.id}
-          placeholder={contact.id}
+          placeholder="Enter ID"
         />
-        <button onClick={handleSubmit}>Find</button>
+        <button onClick={handleSubmitContact}>Find</button>
+      </form>
+      <br />
+      <form onChange={handleChangeOpportunity}>
+        <input
+          type="text"
+          id="name"
+          value={opportunity.name}
+          placeholder="Enter name"
+        />
+        <input
+          type="text"
+          id="amount"
+          value={opportunity.amount}
+          placeholder="Enter amount"
+        />
+        <input
+          type="text"
+          id="closeDate"
+          value={opportunity.closeDate}
+          placeholder="Enter close date"
+        />
+        <button onClick={handleSubmitOpportunity}>Add Opportunity</button>
       </form>
     </div>
   );

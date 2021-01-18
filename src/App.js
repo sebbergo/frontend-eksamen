@@ -8,6 +8,7 @@ import Contact from "./Contact";
 import AddContact from "./AddContact";
 import GetContact from "./GetContact";
 import EditContact from "./EditContact";
+import Opportunities from "./Opportunities";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -93,6 +94,11 @@ function App() {
                   GetContact={GetContact}
                   EditContact={EditContact}
                 />
+              </Route>
+            </div>
+            <div>
+              <Route path="/opportunities">
+                <Opportunities />
               </Route>
             </div>
           </div>
