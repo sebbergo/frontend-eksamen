@@ -56,50 +56,39 @@ function apiFacade() {
 
     let role = getRole();
 
-    return fetch(URL + "/api/info/" + role, options).then(handleHttpErrors);
+    return fetch(URL + "/api/contact/" + role, options).then(handleHttpErrors);
   };
 
-  const fetchStarwars = () => {
-    const options = makeOptions("GET");
+  const fetchContacts = () => {
+    const options = makeOptions("GET", true);
 
-    return fetch(URL + "/api/info/sw/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/contact/all", options).then(handleHttpErrors);
   };
 
-  const fetchStarwarsPlanets = () => {
-    const options = makeOptions("GET");
+  const createContact = (body) => {
+    const options = makeOptions("POST", true, body);
 
-    return fetch(URL + "/api/info/planets/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/contact/create", options).then(handleHttpErrors);
   };
 
-  const fetchJoke = () => {
-    const options = makeOptions("GET");
+  const findContact = (id) => {
+    const options = makeOptions("GET", true);
 
-    return fetch(URL + "/api/info/joke/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/contact/get/" + id, options).then(
+      handleHttpErrors
+    );
   };
 
-  const storeJoke = () => {
-    const options = makeOptions("POST");
+  const editContact = (body) => {
+    const options = makeOptions("PUT", true, body);
 
-    return fetch(URL + "/api/info/storeJoke/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/contact/edit", options).then(handleHttpErrors);
   };
 
-  const addPlanetToUser = (data) => {
-    console.log(data);
+  const deleteContact = (id) => {
+    const options = makeOptions("DELETE", true);
 
-    const options = makeOptions("PUT", "false", data);
-
-    /*
-    var options = {
-      method: "PUT",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-    };
-    */
-
-    return fetch(URL + "/api/info/addPlanetToUser", options).then(
+    return fetch(URL + "/api/contact/delete/" + id, options).then(
       handleHttpErrors
     );
   };
@@ -129,12 +118,12 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    fetchStarwars,
     getRole,
-    fetchJoke,
-    storeJoke,
-    fetchStarwarsPlanets,
-    addPlanetToUser,
+    fetchContacts,
+    createContact,
+    findContact,
+    editContact,
+    deleteContact,
   };
 }
 
